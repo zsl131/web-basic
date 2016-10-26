@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/webModel">
+
+<head>
+    <title th:text="'404错误'+${session.appConfig.appName}">404错误</title>
+
+    <link rel="stylesheet" type="text/css" href="/web/article.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/web/cate.css"/>
+    <link rel="stylesheet" type="text/css" href="/web/tags.css"/>
+    <link rel="stylesheet" type="text/css" href="/web/hot-article.css"/>
+    <script type="text/javascript" src="/web/cate.js"></script>
+    <script type="text/javascript" src="/web/tags.js"></script>
+    <script type="text/javascript" src="/web/hot-article.js"></script>
+    <link rel="stylesheet" type="text/css" href="/web/notice.css"/>
+    <script type="text/javascript" src="/web/notice.js"></script>
+    <script type="text/javascript" src="/web/error.js"></script>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="col-md-9 col-sm-9 col-xs-9" style="padding-top:20px;">
+        <div class="my-border container-fluid" style="">
+            <div class="text-center" style="font-size:200px; color:#a72d2d"><i class="fa fa-trash-o"></i>
+                <p style="font-size:30px;">受访页面已不复存在！<a href="/" class="btn btn-lg btn-info"><i class="fa fa-home"></i> 首&nbsp;页</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3">
+        <div class="container-fluid show-notice"></div>
+        <div class="container-fluid show-cate"></div>
+        <div class="container-fluid hot-article" showLength="10"></div>
+        <div class="container-fluid show-tags"></div>
+    </div>
+</div>
+</body>
+</html>
