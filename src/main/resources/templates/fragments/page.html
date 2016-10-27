@@ -10,7 +10,7 @@
     <body>
         <div th:fragment="pager">
             <div class="text-right" th:with="baseUrl=${#httpServletRequest.getRequestURL().toString()},pars=${#httpServletRequest.getQueryString() eq null ? '' : new String(#httpServletRequest.getQueryString().getBytes('iso8859-1'), 'UTF-8')}">
-                <ul style="margin:0px;" class="pagination pagination-lg" th:with="newPar=${new java.lang.String(pars eq null ? '' : pars).replace('page='+(datas.number), '')},
+                <ul style="margin:0px;" class="pagination" th:with="newPar=${new java.lang.String(pars eq null ? '' : pars).replace('page='+(datas.number), '')},
                                                 curTmpUrl=${baseUrl+'?'+newPar},
                                                 curUrl=${curTmpUrl.endsWith('&amp;') ? curTmpUrl.substring(0, curTmpUrl.length()-1):curTmpUrl}" >
                     <!--<li th:text="${pars}"></li>-->

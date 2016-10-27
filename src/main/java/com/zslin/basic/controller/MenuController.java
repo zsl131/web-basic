@@ -46,14 +46,14 @@ public class MenuController {
     @AdminAuth(name = "菜单管理", orderNum = 1, icon="icon-list", type="1")
     @RequestMapping(value="list", method= RequestMethod.GET)
     public String list(Model model, Integer pid, Integer page, HttpServletRequest request) {
-        String treeJson = menuServiceImpl.queryTreeJson(null);
+        String treeJson = menuServiceImpl.queryTreeJson("1");
         Page<Menu> datas ;
         if(pid==null || pid<=0) {
             BaseSearch<Menu> spec = new BaseSearch<>(new SearchDto("pid", "isnull", ""));
-            datas = menuService.findAll(Specifications.where(spec), PageableUtil.basicPage(page, 15, new SortDto("asc", "orderNum")));
+            datas = menuService.findAll(Specifications.where(spec).and(new BaseSearch<>(new SearchDto("type", "eq", "1"))), PageableUtil.basicPage(page, 15, new SortDto("asc", "orderNum")));
         } else {
             BaseSearch<Menu> spec = new BaseSearch<>(new SearchDto("pid", "eq", pid));
-            datas = menuService.findAll(Specifications.where(spec), PageableUtil.basicPage(page, 15, new SortDto("asc", "orderNum")));
+            datas = menuService.findAll(Specifications.where(spec).and(new BaseSearch<>(new SearchDto("type", "eq", "1"))), PageableUtil.basicPage(page, 15, new SortDto("asc", "orderNum")));
         }
         model.addAttribute("treeJson", treeJson);
         model.addAttribute("datas", datas);

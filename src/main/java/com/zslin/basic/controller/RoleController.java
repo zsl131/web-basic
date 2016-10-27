@@ -10,6 +10,7 @@ import com.zslin.basic.service.RoleMenuServiceImpl;
 import com.zslin.basic.tools.PinyinToolkit;
 import com.zslin.basic.tools.TokenTools;
 import com.zslin.basic.utils.PageableUtil;
+import com.zslin.basic.utils.ParamFilterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -45,7 +46,7 @@ public class RoleController {
     @AdminAuth(name = "角色管理", orderNum = 1, icon="icon-list", type="1")
     @RequestMapping(value="list", method= RequestMethod.GET)
     public String list(Model model, Integer page, HttpServletRequest request) {
-        Page<Role> datas = roleService.findAll(PageableUtil.basicPage(page));
+        Page<Role> datas = roleService.findAll(new ParamFilterUtil<Role>().buildSearch(model, request), PageableUtil.basicPage(page));
         model.addAttribute("datas", datas);
         return "admin/basic/role/list";
     }

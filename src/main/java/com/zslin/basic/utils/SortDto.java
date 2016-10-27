@@ -28,12 +28,15 @@ public class SortDto {
     }
 
     public SortDto(String orderType, String orderField) {
+        orderField = orderField==null||"".equalsIgnoreCase(orderField)?"id":orderField;
+        orderType = orderType==null||"".equalsIgnoreCase(orderType)?"desc":orderType;
         this.orderType = orderType;
         this.orderField = orderField;
     }
 
     //默认为DESC排序
     public SortDto(String orderField) {
+        orderField = orderField==null||"".equalsIgnoreCase(orderField)?"id":orderField;
         this.orderField = orderField;
         this.orderType = "desc";
     }

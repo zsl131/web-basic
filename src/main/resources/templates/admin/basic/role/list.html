@@ -20,11 +20,10 @@
 			<div th:replace="admin/basic/role/nav :: content" th:remove="tag"></div>
 		</div>
 
-		<!-- <div class="table-header">
-			Results for "Latest Registered Domains"
-		</div> -->
+        <div th:replace="admin/basic/role/filter :: content" th:remove="tag"></div>
+
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -34,14 +33,14 @@
 					</tr>
 				</thead>
 
-				<tbody th:each="obj : ${datas}">
-					<tr>
+				<tbody>
+					<tr th:each="obj : ${datas}">
 						<td th:text="${obj.id}">${obj.id}</td>
 						<td th:text="${obj.name}">${obj.name}</td>
 						<td th:text="${obj.sn}">${obj.sn}</td>
 						<td>
 							<div class="action-buttons">
-								<a class="blue auth" sn="RoleController.menus" title="分配权限" th:href="'/admin/role/menus/'+${obj.id}"><i class="icon-key bigger-130"></i></a>
+								<a class="blue auth" sn="RoleController.menus" title="分配权限" th:href="'/admin/role/menus/'+${obj.id}"><i class="fa fa-key"></i></a>
 								<a class="green auth" sn="RoleController.update" title="修改" th:href="'/admin/role/update/'+${obj.id}">
 									<i class="fa fa-pencil"></i>
 								</a>
