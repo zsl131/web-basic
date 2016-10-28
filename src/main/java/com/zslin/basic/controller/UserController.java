@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,6 +80,7 @@ public class UserController {
         if(TokenTools.isNoRepeat(request)) {
             User u = userService.findByUsername(user.getUsername());
             if(u!=null) {throw new SystemException("用户名【"+user.getUsername()+"】已经存在，不可重复添加！");}
+            user.setCreateDate(new Date());
             userService.save(user);
         }
         return "redirect:/admin/user/list";
