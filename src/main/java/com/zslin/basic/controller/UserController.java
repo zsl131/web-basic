@@ -8,6 +8,7 @@ import com.zslin.basic.model.User;
 import com.zslin.basic.service.IRoleService;
 import com.zslin.basic.service.IUserService;
 import com.zslin.basic.service.UserRoleServiceImpl;
+import com.zslin.basic.tools.SecurityUtil;
 import com.zslin.basic.tools.TokenTools;
 import com.zslin.basic.utils.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -81,6 +83,10 @@ public class UserController {
             User u = userService.findByUsername(user.getUsername());
             if(u!=null) {throw new SystemException("用户名【"+user.getUsername()+"】已经存在，不可重复添加！");}
             user.setCreateDate(new Date());
+            try {
+                user.setPassword(SecurityUtil.md5(user.getUsername(), user.getPassword()));
+            } catch (NoSuchAlgorithmException e) {
+            }
             userService.save(user);
         }
         return "redirect:/admin/user/list";
